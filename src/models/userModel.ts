@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    verficationCode: String,
+    verificationCode: String,
     verificationTokenExpiry: Date,
     pocketToken: String,
     notionToken: String,
