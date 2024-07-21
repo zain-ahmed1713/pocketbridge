@@ -38,14 +38,14 @@ export const POST = async(request: NextRequest) => {
         const sendEmail = await sendVerificationEmail(email, verificationCode)
 
         const expiryDate = new Date();
-        expiryDate.setHours(expiryDate.getHours() + 1);
+        const setVerificationTokenExpiry = expiryDate.setHours(expiryDate.getHours() + 1);
 
         const createUser = new userModel({
             username,
             email,
             password: hashedPassword,
             verificationCode: verificationCode,
-            verificationTokenExpiry: expiryDate
+            verificationTokenExpiry: setVerificationTokenExpiry
         })
 
         const savedUser = await createUser.save()
