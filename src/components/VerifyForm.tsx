@@ -23,6 +23,7 @@ const VerifyForm = () => {
       const regenerateCode = await handleNewCode({ username });
       if (regenerateCode?.data.message === "New code has been generated") {
         toast.success("A new code has been sent to your email");
+        setRegenerateCode(false);
         return;
       }
 
