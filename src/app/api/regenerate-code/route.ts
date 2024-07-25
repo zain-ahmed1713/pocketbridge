@@ -17,10 +17,7 @@ export const POST = async(request: NextRequest) => {
         const expiryDate = new Date();
         const setVerificationTokenExpiry = expiryDate.setHours(expiryDate.getHours() + 1);
 
-        const saveNewCode = new userModel({
-            verificationCode: verificationCode,
-            verificationTokenExpiry: setVerificationTokenExpiry
-        })
+       const saveNewCode = await userModel.findByIdAndUpdate(user._id, {verificationCode: verificationCode, verificationTokenExpiry: setVerificationTokenExpiry});
 
         const codeSaved = await saveNewCode.save()
 
@@ -30,7 +27,7 @@ export const POST = async(request: NextRequest) => {
         })
 
     } catch (error) {
-        NextResponse.json({
+       return NextResponse.json({
             error: `Couldn't generate new code. Error: ${error}`
         })
     }
