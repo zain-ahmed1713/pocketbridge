@@ -17,6 +17,12 @@ export const POST = async (request: NextRequest) => {
             })
         }
 
+        if(user.isVerified) {
+            return NextResponse.json({
+                message: "User already verified"
+            })
+        } 
+
         
         if(new Date(user.verificationTokenExpiry) > new Date()) {
             if(user.verificationCode === verificationCode) {
