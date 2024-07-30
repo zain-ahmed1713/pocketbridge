@@ -25,7 +25,7 @@ export function SigninForm() {
       }
 
       const user: any = await handleSignin({ username, password });
-      console.log(user);
+      // console.log(user);
       setBtnDisabled(false);
       if (user?.error) {
         toast.error("Invalid Credentials");
@@ -33,7 +33,7 @@ export function SigninForm() {
       }
 
       if (user?.url) {
-        router.push("/dashboard");
+        router.push(`/dashboard/${username}`);
       }
     } catch (error: any) {
       toast.error("Error:", error.message);
