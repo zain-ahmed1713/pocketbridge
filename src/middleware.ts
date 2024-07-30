@@ -10,7 +10,6 @@ export async function middleware(request: NextRequest) {
         (
             url.pathname.startsWith('/auth/signin') ||
             url.pathname.startsWith('/signup') ||
-            url.pathname.startsWith('/verify') || 
             url.pathname.startsWith('/dashboard') &&
             url.pathname !== '/dashboard'
         )
@@ -20,7 +19,6 @@ export async function middleware(request: NextRequest) {
 
     if(!token && 
         (
-            url.pathname.startsWith('/verify') || 
             url.pathname.startsWith('/dashboard')
         )
     ){
