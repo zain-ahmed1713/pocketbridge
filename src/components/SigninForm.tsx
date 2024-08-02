@@ -6,12 +6,16 @@ import { cn } from "@/lib/utils";
 import toast, { Toaster } from "react-hot-toast";
 import handleSignin from "@/helpers/handleSignin";
 import { useRouter } from "next/navigation";
+import { useDispatch, UseDispatch } from "react-redux";
+import { setUser } from "@/store/userSlice";
 // import { IconBrandGoogle } from "@tabler/icons-react";
 
 export function SigninForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(false);
+
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,6 +37,7 @@ export function SigninForm() {
       }
 
       if (user?.url) {
+        dispatch(setUser({ username }));
         router.push(`/dashboard/${username}`);
       }
     } catch (error: any) {
